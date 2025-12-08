@@ -22,6 +22,7 @@ class DocumentOut(BaseModel):
     hospital_id: str
     doc_type: str
     file_path: str
+    original_file_path: str | None = None
     status: str
     created_at: datetime
     updated_at: datetime

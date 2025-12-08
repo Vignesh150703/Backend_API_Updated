@@ -1,24 +1,25 @@
 from __future__ import annotations
 
-from datetime import datetime
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ProcessRequest(BaseModel):
     priority: Optional[int] = 5
 
 
-class JobStatus(BaseModel):
-    job_id: str
-    status: str
-    created_at: datetime
-    updated_at: datetime
+class FileStageStatus(BaseModel):
+    file: str
+    ocr: str
+    spellcheck: str
+    deid: str
 
 
 class StatusResponse(BaseModel):
-    job: JobStatus
-    documents: List[dict]
-    errors: List[str]
+    job_id: str
+    status: str
+    overall_progress: str | None = None
+    files: List[FileStageStatus] = Field(default_factory=list)
+    message: str | None = None
 

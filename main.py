@@ -6,6 +6,7 @@ from fastapi import FastAPI
 
 from app.api.document_routes import router as document_router
 from app.api.result_routes import router as result_router
+from app.api.status_routes import router as status_router
 from app.api.upload_routes import router as upload_router
 from app.db.base import Base
 from app.db.session import engine
@@ -25,4 +26,5 @@ app = FastAPI(title="Medical Document Pipeline", lifespan=lifespan)
 app.include_router(upload_router)
 app.include_router(document_router)
 app.include_router(result_router)
+app.include_router(status_router)
 

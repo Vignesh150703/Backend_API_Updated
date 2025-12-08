@@ -36,6 +36,7 @@ class Document(Base):
     hospital_id: Mapped[str] = mapped_column(String(64), nullable=False)
     doc_type: Mapped[str] = mapped_column(String(64), nullable=False)
     file_path: Mapped[str] = mapped_column(String(255), nullable=False)
+    original_file_path: Mapped[str | None] = mapped_column(String(255), nullable=True)
     status: Mapped[str] = mapped_column(String(20), default=DocumentStatusEnum.UPLOADED.value)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(

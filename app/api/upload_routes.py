@@ -24,8 +24,8 @@ async def upload_documents(
 ) -> UploadResponse:
     metadata = UploadMetadata(patient_id=patient_id, hospital_id=hospital_id, doc_type=doc_type)
     try:
-        job_id, documents, job_status = await upload_service.create_job_with_documents(session, files, metadata)
-        return UploadResponse(job_id=job_id, document=documents, status=job_status)
+        job_id = await upload_service.create_job_with_documents(session, files, metadata)
+        return UploadResponse(job_id=job_id)
     except PopplerNotInstalledError as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
