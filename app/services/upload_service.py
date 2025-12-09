@@ -42,7 +42,8 @@ class UploadService:
                 default_ext = ".pdf" if file_kind == "pdf" else ".bin"
                 original_name = f"original{default_ext}"
             
-            base_storage_path = f"{metadata.hospital_id}/{metadata.patient_id}/{metadata.doc_type}"
+            doc_type = metadata.doc_type.value if hasattr(metadata.doc_type, "value") else metadata.doc_type
+            base_storage_path = f"{metadata.hospital_id}/{metadata.patient_id}/{doc_type}"
             
             original_content_type = file.content_type or (
                 "application/pdf" if file_kind == "pdf" else "application/octet-stream"
