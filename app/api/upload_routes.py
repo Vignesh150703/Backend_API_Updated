@@ -16,9 +16,9 @@ upload_service = get_upload_service()
 
 @router.post("", response_model=UploadResponse, status_code=status.HTTP_201_CREATED)
 async def upload_documents(
-    patient_id: str = Form(..., example="patient_123"),
-    hospital_id: str = Form(..., example="hospital_456"),
-    doc_type: DocTypeEnum = Form(...),
+    patient_id: str,
+    hospital_id: str,
+    doc_type: DocTypeEnum = Form(..., example="select"),
     files: List[UploadFile] = File(...),
     session: AsyncSession = Depends(get_db_session),
 ) -> UploadResponse:

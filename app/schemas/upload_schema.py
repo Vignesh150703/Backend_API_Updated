@@ -13,8 +13,8 @@ class DocTypeEnum(str, enum.Enum):
 
 
 class UploadMetadata(BaseModel):
-    patient_id: str = Field(..., min_length=1, example="patient_123")
-    hospital_id: str = Field(..., min_length=1, example="hospital_456")
+    patient_id: str = Field(..., min_length=1)
+    hospital_id: str = Field(..., min_length=1)
     doc_type: DocTypeEnum = Field(...)
 
 
