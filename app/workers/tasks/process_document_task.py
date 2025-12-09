@@ -42,7 +42,7 @@ async def _process_job(job_id: str) -> None:
         await log_service.record(session, level="INFO", message="Job processing started", job_id=job_id)
 
         for document in documents:
-            file_bytes = await storage.retrieve_file(document.file_path)
+            file_bytes = await storage.retrieve_file(document.original_file_path)
             is_pdf = file_bytes.startswith(b"%PDF")
 
             if is_pdf:

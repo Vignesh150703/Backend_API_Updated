@@ -13,10 +13,17 @@ engine = create_async_engine(
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     expire_on_commit=False,
+    autocommit=False,
+    autoflush=False,
 )
 
 
 async def get_db_session() -> AsyncSession:
     async with AsyncSessionLocal() as session:
-        yield session
+        try:
+            yield session
+        except Exception:
+            # Rollback on exception - commits made before exceptions will persist (commit is atomic)
+            await session.rollback()
+            raise
 

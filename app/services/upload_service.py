@@ -35,13 +35,15 @@ class UploadService:
         for file in files:
             content = await file.read()
             document_id = str(uuid.uuid4())
-            base_storage_path = f"{metadata.hospital_id}/{metadata.patient_id}/{job.job_id}/{metadata.doc_type}/{document_id}"
 
             file_kind = detect_file_kind(file.filename or "", file.content_type or "")
             original_name = Path(file.filename or "").name
             if not original_name:
                 default_ext = ".pdf" if file_kind == "pdf" else ".bin"
                 original_name = f"original{default_ext}"
+            
+            base_storage_path = f"{metadata.hospital_id}/{metadata.patient_id}/{metadata.doc_type}"
+            
             original_content_type = file.content_type or (
                 "application/pdf" if file_kind == "pdf" else "application/octet-stream"
             )
