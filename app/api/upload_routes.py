@@ -18,7 +18,7 @@ upload_service = get_upload_service()
 async def upload_documents(
     patient_id: str,
     hospital_id: str,
-    doc_type: DocTypeEnum = Form(..., example="select"),
+    doc_type: DocTypeEnum,
     files: List[UploadFile] = File(...),
     session: AsyncSession = Depends(get_db_session),
 ) -> UploadResponse:
